@@ -10,21 +10,32 @@ import { routes } from './app/app.routes';
 
 import { provideState } from '@ngrx/store';
 import { bookmarksFeature } from './app/state/bookmarks/bookmarks.reducer';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { importProvidersFrom } from '@angular/core';
+
+import { BookmarkDataService } from './app/core/in-memory/bookmark-data.service';
+// import { BookmarksEffects } from './app/state/bookmarks/bookmarks.effects';
+import { BookmarksEffects } from './app/state/bookmarks/bookmarks.effects';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
 
-    // Root Store
     provideStore(),
-    
-    // Feature State
     provideState(bookmarksFeature),
 
-    // Root Effects
-    provideEffects(),
+    provideEffects(BookmarksEffects),
 
-    // DevTools
+    provideHttpClient(withInterceptorsFromDi()),
+
+    importProvidersFrom(
+      HttpClientInMemoryWebApiModule.forRoot(BookmarkDataService, {
+        delay: 300,
+      })
+    ),
+
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
