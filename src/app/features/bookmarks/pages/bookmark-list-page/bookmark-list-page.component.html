@@ -1,3 +1,79 @@
 <h2>Bookmarks</h2>
 
-<p>Total bookmarks: {{ (bookmarks$ | async)?.length }}</p>
+<button
+  mat-raised-button
+  color="primary"
+  routerLink="/bookmarks/new">
+  New Bookmark
+</button>
+
+<mat-card *ngIf="(groupedBookmarks$ | async) as groups">
+
+
+<mat-card *ngIf="(groupedBookmarks$ | async) as groups">
+
+  <!-- TODAY -->
+  <ng-container *ngIf="groups.today.length > 0">
+    <h3>Today</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let bookmark of groups.today">
+        <div class="bookmark-item">
+
+          <div class="bookmark-info">
+            <div class="bookmark-name">
+              {{ bookmark.name }}
+            </div>
+
+            <div class="bookmark-url">
+              <a [href]="bookmark.url" target="_blank">
+                {{ bookmark.url }}
+              </a>
+            </div>
+
+            <div class="bookmark-date">
+              {{ bookmark.createdAt | date:'medium' }}
+            </div>
+          </div>
+
+          <div class="bookmark-actions">
+            <button
+              mat-button
+              color="primary"
+              [routerLink]="['/bookmarks', bookmark.id, 'edit']">
+              Edit
+            </button>
+
+            <button
+              mat-button
+              color="warn"
+              (click)="onDelete(bookmark.id)">
+              Delete
+            </button>
+          </div>
+
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
+
+  <!-- YESTERDAY -->
+  <ng-container *ngIf="groups.yesterday.length > 0">
+    <h3>Yesterday</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let bookmark of groups.yesterday">
+        {{ bookmark.name }}
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
+
+  <!-- OLDER -->
+  <ng-container *ngIf="groups.older.length > 0">
+    <h3>Older</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let bookmark of groups.older">
+        {{ bookmark.name }}
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
+
+</mat-card>

@@ -36,8 +36,19 @@ export const bookmarksFeature = createFeature({
     ),
 
     // DELETE
-    on(BookmarksActions.deleteBookmark, (state, { id }) =>
-      adapter.removeOne(id, state)
-    )
+   on(BookmarksActions.deleteBookmarkSuccess, (state, { id }) =>
+    adapter.removeOne(id, state)
+    ),
+
+    on(BookmarksActions.createBookmarkSuccess, (state, { bookmark }) =>
+      adapter.addOne(bookmark, state)
+    ),
+
+    on(BookmarksActions.updateBookmarkSuccess, (state, { bookmark }) =>
+      adapter.updateOne(
+        { id: bookmark.id, changes: bookmark },
+        state
+      )
+    ),
   ),
 });

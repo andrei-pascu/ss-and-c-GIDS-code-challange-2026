@@ -1,0 +1,29 @@
+.bookmark-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.bookmark-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookmark-name {
+  font-weight: 500;
+}
+
+.bookmark-url {
+  font-size: 14px;
+}
+
+.bookmark-date {
+  font-size: 12px;
+  color: gray;
+}
+
+.bookmark-actions {
+  display: flex;
+  gap: 8px;
+}

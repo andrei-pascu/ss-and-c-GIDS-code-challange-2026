@@ -1,6 +1,8 @@
 import { createSelector } from '@ngrx/store';
 import { adapter } from './bookmarks.state';
 import { bookmarksFeature } from './bookmarks.reducer';
+import { groupBookmarksByDate } from '../../features/bookmarks/utils/bookmark-date.util';
+
 
 const {
   selectAll,
@@ -19,3 +21,14 @@ export const selectBookmarksLoading =
 
 export const selectBookmarksError =
   bookmarksFeature.selectError;
+
+export const selectGroupedBookmarks = createSelector(
+  selectAllBookmarks,
+  (bookmarks) => groupBookmarksByDate(bookmarks)
+);
+
+export const selectBookmarkById = (id: string) =>
+  createSelector(
+    selectAllBookmarks,
+    (bookmarks) => bookmarks.find(b => b.id === id)
+  );

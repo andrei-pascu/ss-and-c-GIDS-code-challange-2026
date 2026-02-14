@@ -4,3 +4,5 @@ export interface Bookmark {
   url: string;
   createdAt: string;
 }
+
+export type CreateBookmarkDto = Omit<Bookmark, 'id'>;
