@@ -7,14 +7,14 @@ export interface BookmarkGroups {
 }
 
 export function groupBookmarksByDate(
-  bookmarks: Bookmark[]
+  bookmarks: Bookmark[],
+  now: Date = new Date()
 ): BookmarkGroups {
 
   const today: Bookmark[] = [];
   const yesterday: Bookmark[] = [];
   const older: Bookmark[] = [];
 
-  const now = new Date();
   const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const yesterdayDate = new Date(todayDate);
   yesterdayDate.setDate(todayDate.getDate() - 1);

@@ -24,13 +24,13 @@ export class BookmarkDataService implements InMemoryDbService {
         id: crypto.randomUUID(),
         name: 'NotReact',
         url: 'https://react.dev/',
-        createdAt: new Date(Date.now() - (ONE_DAY * 2)).toISOString(), // yesterday
+        createdAt: new Date(Date.now() - (ONE_DAY * 2)).toISOString(), // older
       },
       {
         id: crypto.randomUUID(),
         name: 'NotVue.JS',
         url: 'https://vuejs.org/',
-        createdAt: new Date(Date.now() - ONE_WEEK).toISOString(),
+        createdAt: new Date(Date.now() - ONE_WEEK).toISOString(), // older
       }
     ];
 
