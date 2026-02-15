@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppState } from '../../../../state/app.state';
 import { selectBookmarkById } from '../../../../state/bookmarks/bookmarks.selectors';
@@ -29,6 +30,7 @@ import { Bookmark } from '../../../../core/models/bookmark.model';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatToolbarModule,
     MatCardModule
   ],
   templateUrl: './bookmark-edit-page.component.html',

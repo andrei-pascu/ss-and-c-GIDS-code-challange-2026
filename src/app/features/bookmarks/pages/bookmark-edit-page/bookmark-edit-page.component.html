@@ -1,25 +1,37 @@
-<h2>Edit Bookmark</h2>
+<!-- HEADER -->
+<mat-toolbar color="primary" class="toolbar">
+  <span class="app-title">Bookmarker</span>
+</mat-toolbar>
 
-<mat-card>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<!-- CONTENT -->
+<div class="page-container">
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name" />
-    </mat-form-field>
+  <h2 class="page-title">Edit Bookmark</h2>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>URL</mat-label>
-      <input matInput formControlName="url" />
-    </mat-form-field>
+  <mat-card class="form-card">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="form.invalid">
-      Save
-    </button>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
 
-  </form>
-</mat-card>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>URL</mat-label>
+        <input matInput formControlName="url" />
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid">
+          Save Changes
+        </button>
+      </div>
+
+    </form>
+  </mat-card>
+
+</div>

@@ -1,0 +1,42 @@
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 100px;
+  padding: 0 50px;
+  background-color: #7fb2c7;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.page-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.page-title {
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.form-card {
+  padding: 24px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-card {
+  background-color: #dae6eb;
+}

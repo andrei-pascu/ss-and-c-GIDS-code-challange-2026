@@ -1,3 +1,39 @@
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.search-field {
+  width: 350px;
+  background: white;
+  border-radius: 4px;
+}
+
+.page-container {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+
+.section-title {
+  margin: 26px 0 16px 0;
+  font-weight: 500;
+}
+
+.bookmark-card {
+  margin-bottom: 16px;
+}
+
 .bookmark-item {
   display: flex;
   justify-content: space-between;
@@ -8,22 +44,57 @@
 .bookmark-info {
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .bookmark-name {
   font-weight: 500;
 }
 
-.bookmark-url {
-  font-size: 14px;
+.bookmark-url a {
+  text-decoration: none;
+  color: #1976d2;
+}
+
+.bookmark-url a:hover {
+  text-decoration: underline;
 }
 
 .bookmark-date {
   font-size: 12px;
-  color: gray;
+  opacity: 0.7;
 }
 
 .bookmark-actions {
   display: flex;
   gap: 8px;
+}
+
+mat-list-item {
+  min-height: 106px;
+  background-color: #dae6eb;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  padding: 20px;
+}
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  padding: 0 50px;
+  background-color: #7fb2c7;
+}
+
+mat-form-field div {
+  height :100px
+}
+
+.mat-mdc-text-field-wrapper {
+  border-top-left-radius: 12px;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  display: none!important;
+  height: 1110px;
 }

@@ -1,20 +1,66 @@
-<h2>Bookmarks</h2>
+<!-- TOP TOOLBAR -->
+<mat-toolbar color="primary" class="toolbar">
 
-<button
-  mat-raised-button
-  color="primary"
-  routerLink="/bookmarks/new">
-  New Bookmark
-</button>
+  <!-- LEFT -->
+  <span class="app-title">Bookmarker</span>
 
-<mat-form-field appearance="outline" class="full-width">
-  <mat-label>Search bookmarks</mat-label>
-  <input matInput [formControl]="searchControl" />
-</mat-form-field>
 
-<mat-card *ngIf="(filteredBookmarks$ | async) as bookmarks">
+
+  <mat-form-field appearance="fill" subscriptSizing="dynamic" class="search-field">
+    <mat-icon matPrefix>search</mat-icon>
+    <input
+      matInput
+      placeholder="Filter Bookmarks..."
+      [formControl]="searchControl" />
+  </mat-form-field>
+
+
+  <!-- RIGHT -->
+  <button
+    mat-icon-button
+    color="accent"
+    routerLink="/bookmarks/new"
+    aria-label="Add Bookmark">
+    <mat-icon>add</mat-icon>
+  </button>
+
+</mat-toolbar>
+
+
+<!-- CONTENT -->
+<div class="page-container">
+
+  <ng-container *ngIf="(groupedBookmarks$ | async) as groups">
+
+    <!-- TODAY -->
+    <section *ngIf="groups.today.length">
+      <h3 class="section-title">Today</h3>
+      <ng-container *ngTemplateOutlet="bookmarkList; context:{ $implicit: groups.today }"></ng-container>
+    </section>
+
+    <!-- YESTERDAY -->
+    <section *ngIf="groups.yesterday.length">
+      <h3 class="section-title">Yesterday</h3>
+      <ng-container *ngTemplateOutlet="bookmarkList; context:{ $implicit: groups.yesterday }"></ng-container>
+    </section>
+
+    <!-- OLDER -->
+    <section *ngIf="groups.older.length">
+      <h3 class="section-title">Older</h3>
+      <ng-container *ngTemplateOutlet="bookmarkList; context:{ $implicit: groups.older }"></ng-container>
+    </section>
+
+  </ng-container>
+
+</div>
+
+
+<!-- REUSABLE LIST TEMPLATE -->
+<ng-template #bookmarkList let-bookmarks>
+
 
   <mat-list>
+
     <mat-list-item *ngFor="let bookmark of bookmarks">
 
       <div class="bookmark-item">
@@ -37,23 +83,28 @@
 
         <div class="bookmark-actions">
           <button
-            mat-button
+            mat-icon-button
             color="primary"
-            [routerLink]="['/bookmarks', bookmark.id, 'edit']">
-            Edit
+            [routerLink]="['/bookmarks', bookmark.id, 'edit']"
+            aria-label="Edit">
+            <mat-icon>edit</mat-icon>
           </button>
 
           <button
-            mat-button
+            mat-icon-button
             color="warn"
-            (click)="onDelete(bookmark.id)">
-            Delete
+            (click)="onDelete(bookmark.id)"
+            aria-label="Delete">
+            <mat-icon>delete</mat-icon>
           </button>
+
         </div>
 
       </div>
 
     </mat-list-item>
+
   </mat-list>
 
-</mat-card>
+
+</ng-template>
