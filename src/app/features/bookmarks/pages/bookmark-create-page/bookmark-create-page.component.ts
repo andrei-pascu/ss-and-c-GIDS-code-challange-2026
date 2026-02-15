@@ -28,7 +28,6 @@ import * as BookmarksActions from '../../../../state/bookmarks/bookmarks.actions
   styleUrl: './bookmark-create-page.component.scss'
 })
 export class BookmarkCreatePageComponent {
-
   form!: FormGroup;
   constructor(
     private fb: FormBuilder,
@@ -45,16 +44,13 @@ export class BookmarkCreatePageComponent {
     if (this.form.invalid) {
       return;
     }
-
     const bookmark = {
       id: crypto.randomUUID(),
       name: this.form.value.name!,
       url: this.form.value.url!,
       createdAt: new Date().toISOString()
     };
-
     this.store.dispatch(BookmarksActions.createBookmark({ bookmark }));
-
     this.router.navigate(['/bookmarks']);
   }
 }

@@ -4,7 +4,6 @@ import { initialBookmarksState } from './bookmarks.state';
 import { Bookmark } from '../../core/models/bookmark.model';
 
 describe('BookmarksReducer', () => {
-
   const reducer = bookmarksFeature.reducer;
 
   const bookmark: Bookmark = {
@@ -16,7 +15,6 @@ describe('BookmarksReducer', () => {
 
   it('should return initial state', () => {
     const state = reducer(undefined, { type: 'unknown' } as any);
-
     expect(state).toEqual(initialBookmarksState);
   });
 
@@ -25,7 +23,6 @@ describe('BookmarksReducer', () => {
       initialBookmarksState,
       BookmarksActions.loadBookmarks()
     );
-
     expect(state.loading).toBeTrue();
     expect(state.error).toBeNull();
   });
@@ -37,7 +34,6 @@ describe('BookmarksReducer', () => {
         bookmarks: [bookmark]
       })
     );
-
     expect(state.loading).toBeFalse();
     expect(state.ids.length).toBe(1);
     expect(state.entities['1']).toEqual(bookmark);
@@ -50,7 +46,6 @@ describe('BookmarksReducer', () => {
         error: 'Failed'
       })
     );
-
     expect(state.loading).toBeFalse();
     expect(state.error).toBe('Failed');
   });
@@ -60,7 +55,6 @@ describe('BookmarksReducer', () => {
       initialBookmarksState,
       BookmarksActions.createBookmarkSuccess({ bookmark })
     );
-
     expect(state.ids.length).toBe(1);
     expect(state.entities['1']).toEqual(bookmark);
   });
@@ -77,7 +71,6 @@ describe('BookmarksReducer', () => {
       loaded,
       BookmarksActions.deleteBookmarkSuccess({ id: '1' })
     );
-
     expect(state.ids.length).toBe(0);
     expect(state.entities['1']).toBeUndefined();
   });
@@ -89,20 +82,16 @@ describe('BookmarksReducer', () => {
         bookmarks: [bookmark]
       })
     );
-
     const updated = {
       ...bookmark,
       name: 'Updated'
     };
-
     const state = reducer(
       loaded,
       BookmarksActions.updateBookmarkSuccess({
         bookmark: updated
       })
     );
-
     expect(state.entities['1']?.name).toBe('Updated');
   });
-
 })

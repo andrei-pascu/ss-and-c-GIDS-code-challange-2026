@@ -4,8 +4,6 @@
   <!-- LEFT -->
   <span class="app-title">Bookmarker</span>
 
-
-
   <mat-form-field appearance="fill" subscriptSizing="dynamic" class="search-field">
     <mat-icon matPrefix>search</mat-icon>
     <input
@@ -13,7 +11,6 @@
       placeholder="Filter Bookmarks..."
       [formControl]="searchControl" />
   </mat-form-field>
-
 
   <!-- RIGHT -->
   <button
@@ -29,7 +26,6 @@
 
 <!-- CONTENT -->
 <div class="page-container">
-
   <ng-container *ngIf="(groupedBookmarks$ | async) as groups">
 
     <!-- TODAY -->
@@ -49,22 +45,14 @@
       <h3 class="section-title">Older</h3>
       <ng-container *ngTemplateOutlet="bookmarkList; context:{ $implicit: groups.older }"></ng-container>
     </section>
-
   </ng-container>
-
 </div>
-
 
 <!-- REUSABLE LIST TEMPLATE -->
 <ng-template #bookmarkList let-bookmarks>
-
-
   <mat-list>
-
     <mat-list-item *ngFor="let bookmark of bookmarks">
-
       <div class="bookmark-item">
-
         <div class="bookmark-info">
           <div class="bookmark-name">
             {{ bookmark.name }}
@@ -97,14 +85,8 @@
             aria-label="Delete">
             <mat-icon>delete</mat-icon>
           </button>
-
         </div>
-
       </div>
-
     </mat-list-item>
-
   </mat-list>
-
-
 </ng-template>

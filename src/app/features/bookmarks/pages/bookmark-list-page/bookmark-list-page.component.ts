@@ -18,7 +18,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppState } from '../../../../state/app.state';
 import { selectAllBookmarks } from '../../../../state/bookmarks/bookmarks.selectors';
 import * as BookmarksActions from '../../../../state/bookmarks/bookmarks.actions';
-import { Bookmark } from '../../../../core/models/bookmark.model';
 import { groupBookmarksByDate, BookmarkGroups } from '../../utils/bookmark-date.util';
 
 @Component({
@@ -40,32 +39,25 @@ import { groupBookmarksByDate, BookmarkGroups } from '../../utils/bookmark-date.
   styleUrl: './bookmark-list-page.component.scss'
 })
 export class BookmarkListPageComponent implements OnInit {
-
   searchControl = new FormControl('');
-
   groupedBookmarks$!: Observable<BookmarkGroups>;
 
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-
     this.store.dispatch(BookmarksActions.loadBookmarks());
-
     this.groupedBookmarks$ = combineLatest([
       this.store.select(selectAllBookmarks),
       this.searchControl.valueChanges.pipe(startWith(''))
     ]).pipe(
       map(([bookmarks, search]) => {
-
         const term = (search ?? '').toLowerCase().trim();
-
         const filtered = !term
           ? bookmarks
           : bookmarks.filter(b =>
               b.name.toLowerCase().includes(term) ||
               b.url.toLowerCase().includes(term)
             );
-
         return groupBookmarksByDate(filtered);
       })
     );

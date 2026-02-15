@@ -37,9 +37,7 @@ describe('BookmarksEffects', () => {
     const bookmarks: Bookmark[] = [];
 
     api.getAll.and.returnValue(of(bookmarks));
-
     actions$ = of(BookmarksActions.loadBookmarks());
-
     effects.loadBookmarks$.subscribe(action => {
       expect(action).toEqual(
         BookmarksActions.loadBookmarksSuccess({ bookmarks })
@@ -52,9 +50,7 @@ describe('BookmarksEffects', () => {
     api.getAll.and.returnValue(
       throwError(() => new Error('Boom'))
     );
-
     actions$ = of(BookmarksActions.loadBookmarks());
-
     effects.loadBookmarks$.subscribe(action => {
       expect(action.type)
         .toBe(BookmarksActions.loadBookmarksFailure.type);
@@ -75,7 +71,7 @@ describe('BookmarksEffects', () => {
     });
   });
 
-   it('should create bookmark successfully', (done) => {
+  it('should create bookmark successfully', (done) => {
     const bookmark = {
       id: '1',
       name: 'Angular',
@@ -100,31 +96,31 @@ describe('BookmarksEffects', () => {
       done();
     });
   });
-    it('should update and reload bookmarks', (done) => {
-      const bookmark = {
-        id: '1',
-        name: 'Angular',
-        url: 'url',
-        createdAt: 'now'
-      };
 
-      const all: Bookmark[] = [bookmark];
+  it('should update and reload bookmarks', (done) => {
+    const bookmark = {
+      id: '1',
+      name: 'Angular',
+      url: 'url',
+      createdAt: 'now'
+    };
 
-      api.update.and.returnValue(of(bookmark));
-      api.getAll.and.returnValue(of(all));
+    const all: Bookmark[] = [bookmark];
 
-      actions$ = of(
-        BookmarksActions.updateBookmark({ bookmark })
+    api.update.and.returnValue(of(bookmark));
+    api.getAll.and.returnValue(of(all));
+
+    actions$ = of(
+      BookmarksActions.updateBookmark({ bookmark })
+    );
+
+    effects.updateBookmark$.subscribe(action => {
+      expect(action).toEqual(
+        BookmarksActions.loadBookmarksSuccess({
+          bookmarks: all
+        })
       );
-
-      effects.updateBookmark$.subscribe(action => {
-        expect(action).toEqual(
-          BookmarksActions.loadBookmarksSuccess({
-            bookmarks: all
-          })
-        );
-        done();
-      });
+      done();
     });
-  
+  });
 })

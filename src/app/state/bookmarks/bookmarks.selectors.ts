@@ -3,13 +3,7 @@ import { adapter } from './bookmarks.state';
 import { bookmarksFeature } from './bookmarks.reducer';
 import { groupBookmarksByDate } from '../../features/bookmarks/utils/bookmark-date.util';
 
-
-const {
-  selectAll,
-  selectEntities,
-  selectIds,
-  selectTotal,
-} = adapter.getSelectors();
+const { selectAll } = adapter.getSelectors();
 
 export const selectAllBookmarks = createSelector(
   bookmarksFeature.selectBookmarksState,

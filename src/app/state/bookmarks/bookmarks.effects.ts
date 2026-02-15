@@ -6,7 +6,6 @@ import { catchError, map, switchMap, of, tap } from 'rxjs';
 
 @Injectable()
 export class BookmarksEffects {
-
   private actions$ = inject(Actions);
   private api = inject(BookmarkApiService);
 
@@ -36,7 +35,7 @@ export class BookmarksEffects {
       switchMap(({ id }) =>
       this.api.delete(id).pipe(
           map(() =>
-          BookmarksActions.deleteBookmarkSuccess({ id })
+            BookmarksActions.deleteBookmarkSuccess({ id })
           ),
           catchError((error) =>
           of(

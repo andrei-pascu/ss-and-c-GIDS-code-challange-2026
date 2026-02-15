@@ -5,22 +5,17 @@
 
 <!-- CONTENT -->
 <div class="page-container">
-
   <h2 class="page-title">Create Bookmark</h2>
-
   <mat-card class="form-card">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" />
       </mat-form-field>
-
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>URL</mat-label>
         <input matInput formControlName="url" />
       </mat-form-field>
-
       <div class="form-actions">
         <button
           mat-raised-button
@@ -30,8 +25,6 @@
           Create Bookmark
         </button>
       </div>
-
     </form>
   </mat-card>
-
 </div>

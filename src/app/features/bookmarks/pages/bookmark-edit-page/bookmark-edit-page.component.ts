@@ -37,7 +37,6 @@ import { Bookmark } from '../../../../core/models/bookmark.model';
   styleUrl: './bookmark-edit-page.component.scss'
 })
 export class BookmarkEditPageComponent implements OnInit {
-
   form!: FormGroup;
 
   private bookmarkId!: string;
@@ -57,7 +56,6 @@ export class BookmarkEditPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookmarkId = this.route.snapshot.paramMap.get('id')!;
-
     this.store
       .select(selectBookmarkById(this.bookmarkId))
       .pipe(filter((b): b is Bookmark => !!b))
@@ -73,18 +71,15 @@ export class BookmarkEditPageComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.invalid) return;
-
     const updated: Bookmark = {
       id: this.bookmarkId,
       name: this.form.value.name!,
       url: this.form.value.url!,
       createdAt: this.originalCreatedAt   // ✅ do not mutate metadata
     };
-
     this.store.dispatch(
       BookmarksActions.updateBookmark({ bookmark: updated })
     );
-
     this.router.navigate(['/bookmarks']);
   }
 }

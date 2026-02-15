@@ -26,7 +26,6 @@ export function groupBookmarksByDate(
       created.getMonth(),
       created.getDate()
     );
-
     if (createdDate.getTime() === todayDate.getTime()) {
       today.push(bookmark);
     } else if (createdDate.getTime() === yesterdayDate.getTime()) {
@@ -35,6 +34,5 @@ export function groupBookmarksByDate(
       older.push(bookmark);
     }
   }
-
   return { today, yesterday, older };
 }

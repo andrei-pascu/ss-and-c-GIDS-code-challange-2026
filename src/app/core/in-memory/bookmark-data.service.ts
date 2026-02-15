@@ -2,11 +2,9 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Bookmark } from '../models/bookmark.model';
 
 export class BookmarkDataService implements InMemoryDbService {
-
   createDb() {
     const ONE_DAY = 24 * 60 * 60 * 1000;
     const ONE_WEEK = 7 * ONE_DAY;
-
     const bookmarks: Bookmark[] = [
       {
         id: crypto.randomUUID(),
@@ -33,11 +31,10 @@ export class BookmarkDataService implements InMemoryDbService {
         createdAt: new Date(Date.now() - ONE_WEEK).toISOString(), // older
       }
     ];
-
     return { bookmarks };
   }
 
-  genId(bookmarks: Bookmark[]): string {
+  genId(): string {
     return crypto.randomUUID();
   }
 }

@@ -19,9 +19,7 @@ describe('BookmarkCreatePageComponent', () => {
         provideRouter([])
       ]
     }).compileComponents();
-
     store = TestBed.inject(MockStore);
-
     fixture = TestBed.createComponent(BookmarkCreatePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -33,14 +31,11 @@ describe('BookmarkCreatePageComponent', () => {
 
   it('should not dispatch if form is invalid', () => {
     const dispatchSpy = spyOn(store, 'dispatch');
-
     component.form.setValue({
       name: '',
       url: ''
     });
-
     component.onSubmit();
-
     expect(dispatchSpy).not.toHaveBeenCalled();
   });
 
@@ -53,21 +48,16 @@ describe('BookmarkCreatePageComponent', () => {
       name: 'Angular',
       url: 'https://angular.dev'
     });
-
     component.onSubmit();
-
     expect(dispatchSpy).toHaveBeenCalled();
-
     const dispatchedAction: any =
     dispatchSpy.calls.mostRecent().args[0];
-
+    
     expect(dispatchedAction.type).toBe(BookmarksActions.createBookmark.type);
     expect(dispatchedAction.bookmark.name).toBe('Angular');
     expect(dispatchedAction.bookmark.url).toBe('https://angular.dev');
-
     expect(dispatchedAction.bookmark.id).toBeTruthy();
     expect(dispatchedAction.bookmark.createdAt).toBeTruthy();
-
     expect(navigateSpy).toHaveBeenCalledWith(['/bookmarks']);
   });
 });

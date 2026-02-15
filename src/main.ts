@@ -21,17 +21,11 @@ import { BookmarksEffects } from './app/state/bookmarks/bookmarks.effects';
 
 bootstrapApplication(AppComponent, {
   providers: [
-
     provideRouter(routes),
-
     provideStore(),
     provideState(bookmarksFeature),
     provideEffects(BookmarksEffects),
-
-    // ✅ 1. Register HttpClient FIRST
     provideHttpClient(withInterceptorsFromDi()),
-
-    // ✅ 2. Then attach in-memory module
     importProvidersFrom(
       HttpClientInMemoryWebApiModule.forRoot(
         BookmarkDataService,
@@ -43,7 +37,6 @@ bootstrapApplication(AppComponent, {
       maxAge: 25,
       logOnly: !isDevMode(),
     }),
-
   ],
 });
 
